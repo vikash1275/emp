@@ -5,11 +5,9 @@
  */
 package com.neosofttech.technologies.controller;
 
-import com.neosofttech.technologies.dto.Emplyoee;
-import com.neosofttech.technologies.repository.EmplyoeeRepository;
-import com.neosofttech.technologies.service.EmplyoeeService;
+import com.neosofttech.technologies.dto.Attendance;
+import com.neosofttech.technologies.service.EmpAttendService;
 import java.net.URI;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import reactor.core.publisher.Flux;
 
 /**
  *
@@ -25,28 +24,33 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
  */
 
 @RestController
-@RequestMapping("/Webflux")
-public class WebfluxRestController 
-{
-        
-    @Autowired
-    private EmplyoeeService empserv;
+@RequestMapping("/Attendance")
+public class WebfluxAttendRestController {
     
-    @GetMapping("/getAllEmplyoee")
-    public Iterable<Emplyoee> getAllEmplyoee()
+    @Autowired
+    private EmpAttendService attedserv;
+    
+    @GetMapping("/getAllAttendance")
+    public Iterable<Attendance> getAllAttendance()
     {            
-             return empserv.getAllEmplyoee();       
+             return attedserv.getAllAttendance();
     }
     
-    @PostMapping("/addEmplyoee")
-    public ResponseEntity<Object> addEmplyoee(@RequestBody Emplyoee emplyoee)
+    /**
+     *
+     * @return
+     */
+  
+    
+    @PostMapping("/addAttendance")
+    public ResponseEntity<Object> addAttendance(@RequestBody Attendance attendance)
     {	    	
-    	empserv.addEmplyoee(emplyoee);
+    	attedserv.addAttendance(attendance);
         URI path= ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("(emplyoee)")
-                .buildAndExpand(emplyoee.getId())
+                .buildAndExpand(attendance.getId())
                 .toUri();
         return ResponseEntity.created(path).build();
     }
-        
+
 }

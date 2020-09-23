@@ -21,8 +21,10 @@ import org.springframework.stereotype.Component;
 public class EmplyoeeServiceImpl implements EmplyoeeService{
     
     @Autowired
-    EmplyoeeRepository emprepo;
-
+    private EmplyoeeRepository emprepo;
+    
+    Emplyoee emp = new Emplyoee();
+       
     public Emplyoee addEmplyoee(Emplyoee emplyoee) {
        return emprepo.save(emplyoee);
     }

@@ -7,6 +7,8 @@ package com.neosofttech.technologies.dto;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -19,13 +21,9 @@ public class Emplyoee
 {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
-
-    public Emplyoee() {
-        this.id = 1;
-        this.name = "vikash";
-    }
     
     public int getId() {
         return id;

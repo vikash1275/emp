@@ -11,6 +11,7 @@ import com.neosofttech.technologies.service.EmplyoeeService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
 
 /**
  *
@@ -25,8 +26,8 @@ public class EmplyoeeServiceImpl implements EmplyoeeService{
     
     Emplyoee emp = new Emplyoee();
        
-    public Emplyoee addEmplyoee(Emplyoee emplyoee) {
-       return emprepo.save(emplyoee);
+    public Mono<Emplyoee> addEmplyoee(Emplyoee emplyoee) {
+       return Mono.just(emprepo.save(emplyoee));
     }
 
     public List<Emplyoee> getAllEmplyoee() {

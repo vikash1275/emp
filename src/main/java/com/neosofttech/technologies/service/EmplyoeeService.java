@@ -9,6 +9,7 @@ package com.neosofttech.technologies.service;
 import com.neosofttech.technologies.dto.Emplyoee;
 import java.util.List;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
  /**
  *
@@ -20,7 +21,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface EmplyoeeService {
     
-	public Emplyoee addEmplyoee(Emplyoee emplyoee);
+	public Mono<Emplyoee> addEmplyoee(Emplyoee emplyoee);
 	public List<Emplyoee> getAllEmplyoee();	
       
 }

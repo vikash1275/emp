@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import reactor.core.publisher.Mono;
 
 /**
  *
@@ -39,6 +40,13 @@ public class WebfluxRestController
     }
     
     @PostMapping("/addEmplyoee")
+    public Mono<Emplyoee> addEmplyoee(@RequestBody Emplyoee emplyoee)
+    {
+            return  empserv.addEmplyoee(emplyoee);
+    }
+    
+    /*
+    @PostMapping("/addEmplyoee")
     public ResponseEntity<Object> addEmplyoee(@RequestBody Emplyoee emplyoee)
     {	    	
     	empserv.addEmplyoee(emplyoee);
@@ -48,5 +56,6 @@ public class WebfluxRestController
                 .toUri();
         return ResponseEntity.created(path).build();
     }
+    */
         
 }

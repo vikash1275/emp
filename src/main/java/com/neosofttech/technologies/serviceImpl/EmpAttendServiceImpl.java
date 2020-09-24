@@ -27,8 +27,8 @@ public class EmpAttendServiceImpl implements EmpAttendService
     AttendanceRepository attendrep;
     
     @Override
-    public   Attendance  addAttendance(Attendance attendance) {
-       return attendrep.save(attendance);
+    public   Mono<Attendance>  addAttendance(Attendance attendance) {
+       return Mono.just(attendrep.save(attendance));
     }
 
    @Override

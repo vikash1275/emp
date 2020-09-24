@@ -19,7 +19,7 @@ import reactor.core.publisher.Mono;
 @Service
 public interface EmpAttendService 
 {
-public Attendance addAttendance(Attendance attendance);
+public Mono<Attendance> addAttendance(Attendance attendance);
 public List<Attendance> getAllAttendance();
 
 }

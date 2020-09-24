@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 /**
  *
@@ -30,6 +31,13 @@ public class WebfluxAttendRestController {
     @Autowired
     private EmpAttendService attedserv;
     
+    
+    @PostMapping("/addAttendance")
+    public Mono<Attendance> addAttendance(@RequestBody Attendance attendance)
+    {
+            return  attedserv.addAttendance(attendance);
+    }
+    
     @GetMapping("/getAllAttendance")
     public Iterable<Attendance> getAllAttendance()
     {            
@@ -41,7 +49,7 @@ public class WebfluxAttendRestController {
      * @return
      */
   
-    
+  /*  
     @PostMapping("/addAttendance")
     public ResponseEntity<Object> addAttendance(@RequestBody Attendance attendance)
     {	    	
@@ -52,5 +60,6 @@ public class WebfluxAttendRestController {
                 .toUri();
         return ResponseEntity.created(path).build();
     }
-
+*/
+    
 }

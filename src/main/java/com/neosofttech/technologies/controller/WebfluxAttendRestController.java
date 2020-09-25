@@ -40,7 +40,8 @@ public class WebfluxAttendRestController {
     
     @GetMapping("/getAllAttendance")
     public Iterable<Attendance> getAllAttendance()
-    {            
+    {     
+        
              return attedserv.getAllAttendance();
     }
     

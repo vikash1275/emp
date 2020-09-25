@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -34,9 +35,9 @@ public class WebfluxRestController
     private EmplyoeeService empserv;
     
     @GetMapping("/getAllEmplyoee")
-    public Iterable<Emplyoee> getAllEmplyoee()
-    {            
-             return empserv.getAllEmplyoee();       
+    public Flux<Emplyoee> getAllEmplyoee()
+    {         
+       return Flux.fromIterable(empserv.getAllEmplyoee());    
     }
     
     @PostMapping("/addEmplyoee")

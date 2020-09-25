@@ -37,7 +37,7 @@ public class WebfluxRestController
     @GetMapping("/getAllEmplyoee")
     public Flux<Emplyoee> getAllEmplyoee()
     {         
-       return Flux.fromIterable(empserv.getAllEmplyoee());    
+       return empserv.getAllEmplyoee();
     }
     
     @PostMapping("/addEmplyoee")

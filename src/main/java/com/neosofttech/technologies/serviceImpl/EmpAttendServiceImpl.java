@@ -36,6 +36,5 @@ public class EmpAttendServiceImpl implements EmpAttendService
        return (List<Attendance>) attendrep.findAll();
     }
     
-    
          
 }

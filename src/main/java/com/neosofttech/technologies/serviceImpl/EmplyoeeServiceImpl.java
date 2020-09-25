@@ -11,6 +11,7 @@ import com.neosofttech.technologies.service.EmplyoeeService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -30,8 +31,8 @@ public class EmplyoeeServiceImpl implements EmplyoeeService{
        return Mono.just(emprepo.save(emplyoee));
     }
 
-    public List<Emplyoee> getAllEmplyoee() {
-       return (List<Emplyoee>) emprepo.findAll();       
+    public Flux<Emplyoee> getAllEmplyoee() {
+               return Flux.fromIterable(emprepo.findAll());             
     }
     
 }

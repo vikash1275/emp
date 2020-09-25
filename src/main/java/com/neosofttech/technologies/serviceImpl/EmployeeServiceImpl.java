@@ -5,14 +5,14 @@
  */
 package com.neosofttech.technologies.serviceImpl;
 
-import com.neosofttech.technologies.dto.Emplyoee;
-import com.neosofttech.technologies.repository.EmplyoeeRepository;
-import com.neosofttech.technologies.service.EmplyoeeService;
+import com.neosofttech.technologies.dto.Employee;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import com.neosofttech.technologies.service.EmployeeService;
+import com.neosofttech.technologies.repository.EmployeeRepository;
 
 /**
  *
@@ -20,18 +20,18 @@ import reactor.core.publisher.Mono;
  */
 
 @Component
-public class EmplyoeeServiceImpl implements EmplyoeeService{
+public class EmployeeServiceImpl implements EmployeeService{
     
     @Autowired
-    private EmplyoeeRepository emprepo;
+    private EmployeeRepository emprepo;
     
-    Emplyoee emp = new Emplyoee();
+    Employee emp = new Employee();
        
-    public Mono<Emplyoee> addEmplyoee(Emplyoee emplyoee) {
+    public Mono<Employee> addEmplyoee(Employee emplyoee) {
        return Mono.just(emprepo.save(emplyoee));
     }
 
-    public Flux<Emplyoee> getAllEmplyoee() {
+    public Flux<Employee> getAllEmplyoee() {
                return Flux.fromIterable(emprepo.findAll());             
     }
     

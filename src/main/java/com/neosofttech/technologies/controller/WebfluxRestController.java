@@ -5,9 +5,7 @@
  */
 package com.neosofttech.technologies.controller;
 
-import com.neosofttech.technologies.dto.Emplyoee;
-import com.neosofttech.technologies.repository.EmplyoeeRepository;
-import com.neosofttech.technologies.service.EmplyoeeService;
+import com.neosofttech.technologies.dto.Employee;
 import java.net.URI;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import com.neosofttech.technologies.service.EmployeeService;
+import com.neosofttech.technologies.repository.EmployeeRepository;
 
 /**
  *
@@ -32,16 +32,16 @@ public class WebfluxRestController
 {
         
     @Autowired
-    private EmplyoeeService empserv;
+    private EmployeeService empserv;
     
     @GetMapping("/getAllEmplyoee")
-    public Flux<Emplyoee> getAllEmplyoee()
+    public Flux<Employee> getAllEmplyoee()
     {         
        return empserv.getAllEmplyoee();
     }
     
     @PostMapping("/addEmplyoee")
-    public Mono<Emplyoee> addEmplyoee(@RequestBody Emplyoee emplyoee)
+    public Mono<Employee> addEmplyoee(@RequestBody Employee emplyoee)
     {
             return  empserv.addEmplyoee(emplyoee);
     }

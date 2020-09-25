@@ -6,7 +6,7 @@
 
 package com.neosofttech.technologies.service;
 
-import com.neosofttech.technologies.dto.Emplyoee;
+import com.neosofttech.technologies.dto.Employee;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -20,9 +20,9 @@ import reactor.core.publisher.Mono;
 
 
 @Service
-public interface EmplyoeeService {
+public interface EmployeeService {
     
-	public Mono<Emplyoee> addEmplyoee(Emplyoee emplyoee);
-	public Flux<Emplyoee> getAllEmplyoee();	
+	public Mono<Employee> addEmplyoee(Employee emplyoee);
+	public Flux<Employee> getAllEmplyoee();	
       
 }

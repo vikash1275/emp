@@ -5,6 +5,7 @@
  */
 package com.neosofttech.technologies.dto;
 
+import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -27,14 +30,17 @@ public class Attendance
     private Long id;
            
     private String day;
-
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date utilDate;
+     
     public Attendance() {
     }
               
     @OneToOne(cascade = CascadeType.ALL)
-    private Emplyoee emp;  
+    private Employee emp;  
 
-    public Attendance(Long id, String day, Emplyoee emp) {
+    public Attendance(Long id, String day, Employee emp) {
         this.id = id;
         this.day = day;
         this.emp = emp;   
@@ -48,11 +54,11 @@ public class Attendance
         this.day = day;
     }
 
-    public Emplyoee getEmp() {
+    public Employee getEmp() {
         return emp;
     }
 
-    public void setEmp(Emplyoee emp) {
+    public void setEmp(Employee emp) {
         this.emp = emp;
     }
             
@@ -63,5 +69,16 @@ public class Attendance
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Date getUtilDate() {
+        return utilDate;
+    }
+
+    public void setUtilDate(Date utilDate) {
+        this.utilDate = utilDate;
+    }
+    
+    
+    
   
 }

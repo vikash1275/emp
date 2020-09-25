@@ -5,7 +5,7 @@
  */
 package com.neosofttech.technologies.repository;
 
-import com.neosofttech.technologies.dto.Emplyoee;
+import com.neosofttech.technologies.dto.Employee;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface EmplyoeeRepository extends CrudRepository<Emplyoee, Integer>{
+public interface EmployeeRepository extends CrudRepository<Employee, Integer>{
     
 }

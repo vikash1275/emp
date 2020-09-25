@@ -20,6 +20,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import com.neosofttech.technologies.service.EmployeeService;
 import com.neosofttech.technologies.repository.EmployeeRepository;
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
@@ -44,6 +46,12 @@ public class WebfluxRestController
     public Mono<Employee> addEmplyoee(@RequestBody Employee emplyoee)
     {
             return  empserv.addEmplyoee(emplyoee);
+    }
+    
+    @GetMapping("/getEmplyoeeById/{id}")
+    public Mono<Employee> getEmplyoeeById(@PathVariable int id)
+    {         
+       return empserv.getById(id);
     }
     
     /*

@@ -27,7 +27,7 @@ public class Attendance
 
     @Id 
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
            
     private String day;
     
@@ -40,7 +40,7 @@ public class Attendance
     @OneToOne(cascade = CascadeType.ALL)
     private Employee emp;  
 
-    public Attendance(Long id, String day, Employee emp) {
+    public Attendance(int id, String day, Employee emp) {
         this.id = id;
         this.day = day;
         this.emp = emp;   
@@ -62,11 +62,11 @@ public class Attendance
         this.emp = emp;
     }
             
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

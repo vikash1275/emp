@@ -13,6 +13,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import com.neosofttech.technologies.service.EmployeeService;
 import com.neosofttech.technologies.repository.EmployeeRepository;
+import java.util.Optional;
 
 /**
  *
@@ -20,19 +21,29 @@ import com.neosofttech.technologies.repository.EmployeeRepository;
  */
 
 @Component
-public class EmployeeServiceImpl implements EmployeeService{
+public class EmployeeServiceImpl implements EmployeeService
+{
     
     @Autowired
     private EmployeeRepository emprepo;
     
-    Employee emp = new Employee();
        
     public Mono<Employee> addEmplyoee(Employee emplyoee) {
-       return Mono.just(emprepo.save(emplyoee));
+                return Mono.just(emprepo.save(emplyoee));
     }
 
     public Flux<Employee> getAllEmplyoee() {
-               return Flux.fromIterable(emprepo.findAll());             
+                return Flux.fromIterable(emprepo.findAll());             
     }
+    
+    public Mono<Employee> getById(int id) { 
+             Mono<Optional<Employee>> optional = Mono.just(emprepo.findById(id));
+             Mono<Employee> optionalmono = optional.flatMap(Mono::justOrEmpty);
+             return optionalmono;
+    }
+
+    
+    
+    
     
 }

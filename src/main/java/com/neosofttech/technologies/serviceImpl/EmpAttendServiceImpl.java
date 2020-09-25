@@ -9,6 +9,7 @@ import com.neosofttech.technologies.dto.Attendance;
 import com.neosofttech.technologies.repository.AttendanceRepository;
 import com.neosofttech.technologies.service.EmpAttendService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
@@ -30,10 +31,17 @@ public class EmpAttendServiceImpl implements EmpAttendService
     public  Mono<Attendance>  addAttendance(Attendance attendance) {
        return Mono.just(attendrep.save(attendance));
     }
-
-   @Override
+    
+    @Override
     public Flux<Attendance> getAllAttendance() {
            return Flux.fromIterable(attendrep.findAll());             
+    }
+
+    @Override
+    public Mono<Attendance> getById(int id) {
+         Mono<Optional<Attendance>> optional = Mono.just(attendrep.findById(id));
+             Mono<Attendance> optionalmono = optional.flatMap(Mono::justOrEmpty);
+             return optionalmono;
     }
     
          

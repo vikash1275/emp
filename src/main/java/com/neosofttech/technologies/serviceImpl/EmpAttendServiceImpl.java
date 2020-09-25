@@ -32,8 +32,8 @@ public class EmpAttendServiceImpl implements EmpAttendService
     }
 
    @Override
-    public List<Attendance> getAllAttendance() {
-       return (List<Attendance>) attendrep.findAll();
+    public Flux<Attendance> getAllAttendance() {
+           return Flux.fromIterable(attendrep.findAll());             
     }
     
          

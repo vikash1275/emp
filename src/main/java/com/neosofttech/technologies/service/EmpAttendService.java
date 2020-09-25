@@ -20,6 +20,6 @@ import reactor.core.publisher.Mono;
 public interface EmpAttendService 
 {
 public Mono<Attendance> addAttendance(Attendance attendance);
-public List<Attendance> getAllAttendance();
+public Flux<Attendance> getAllAttendance();
 
 }

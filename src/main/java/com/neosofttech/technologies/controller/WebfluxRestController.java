@@ -24,6 +24,7 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
@@ -57,6 +58,12 @@ public class WebfluxRestController
     {         
        return empserv.getById(id);
     }
+    
+   @PutMapping("/{id}")
+   public Mono<Employee> updateOneComputer(@PathVariable("id") int id, @RequestBody Employee employee) {
+       return empserv.update(id, employee);
+   }
+    
     
     @DeleteMapping(value = "/employees/{id}")
     public Mono<String> deleteEmployeeById(@PathVariable("id") int id) {

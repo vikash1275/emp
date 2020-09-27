@@ -27,6 +27,9 @@ public interface EmployeeService {
         public Mono<Employee> getById(int id);
        // public Mono<Void> deleteById(int id);
 
-    public Mono<String> deleteEmployeeById(int id);
+        public Mono<String> deleteEmployeeById(int id);
+
+
+    public Mono<Employee> update(int id, Employee employee);
        
 }

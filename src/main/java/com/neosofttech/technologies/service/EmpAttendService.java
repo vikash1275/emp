@@ -23,4 +23,6 @@ public Mono<Attendance> addAttendance(Attendance attendance);
 public Flux<Attendance> getAllAttendance();
 public Mono<Attendance> getById(int id);
 
+public Mono<String> deleteAttendanceById(int id);
+
 }

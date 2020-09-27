@@ -29,6 +29,11 @@ public class Employee
        
     }
 
+    public Employee(int i, String name) {
+       this.id=i;
+       this.name=name;
+    }
+
      
     public int getId() {
         return id;

@@ -36,8 +36,8 @@ public class Attendance
      
     public Attendance() {
     }
-              
-    @OneToOne(cascade = CascadeType.ALL)
+
+    @OneToOne(cascade = CascadeType.MERGE)
     private Employee emp;  
 
     public Attendance(int id, String day, Employee emp) {

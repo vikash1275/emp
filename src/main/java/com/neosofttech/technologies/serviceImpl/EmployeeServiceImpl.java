@@ -14,6 +14,9 @@ import reactor.core.publisher.Mono;
 import com.neosofttech.technologies.service.EmployeeService;
 import com.neosofttech.technologies.repository.EmployeeRepository;
 import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import reactor.core.publisher.MonoSink;
 
 /**
  *
@@ -47,6 +50,13 @@ public class EmployeeServiceImpl implements EmployeeService
              String message="deleted";     
              return Mono.justOrEmpty(message);
     }
+
+    public Mono<Employee> update(int id, final Employee employee) {
+             return Mono.just(emprepo.save(employee));                   
+        
+    }
+    
+    
 
     
   

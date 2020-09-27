@@ -43,6 +43,13 @@ public class EmpAttendServiceImpl implements EmpAttendService
              Mono<Attendance> optionalmono = optional.flatMap(Mono::justOrEmpty);
              return optionalmono;
     }
+
+    @Override
+    public Mono<String> deleteAttendanceById(int id) {
+             attendrep.deleteById(id);
+             String message="deleted";     
+             return Mono.justOrEmpty(message);
+    }
     
          
 }

@@ -42,6 +42,15 @@ public class EmployeeServiceImpl implements EmployeeService
              return optionalmono;
     }
 
+    public Mono<String> deleteEmployeeById(int id) {
+             emprepo.deleteById(id);
+             String message="deleted";     
+             return Mono.justOrEmpty(message);
+    }
+
+    
+  
+    
     
     
     

@@ -25,7 +25,8 @@ public interface EmployeeService {
 	public Mono<Employee> addEmplyoee(Employee emplyoee);
 	public Flux<Employee> getAllEmplyoee();	
         public Mono<Employee> getById(int id);
-        
-        
-      
+       // public Mono<Void> deleteById(int id);
+
+    public Mono<String> deleteEmployeeById(int id);
+       
 }

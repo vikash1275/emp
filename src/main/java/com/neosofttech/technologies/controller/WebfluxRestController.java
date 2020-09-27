@@ -21,7 +21,10 @@ import reactor.core.publisher.Mono;
 import com.neosofttech.technologies.service.EmployeeService;
 import com.neosofttech.technologies.repository.EmployeeRepository;
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  *
@@ -36,6 +39,7 @@ public class WebfluxRestController
     @Autowired
     private EmployeeService empserv;
     
+      
     @GetMapping("/getAllEmplyoee")
     public Flux<Employee> getAllEmplyoee()
     {         
@@ -53,6 +57,12 @@ public class WebfluxRestController
     {         
        return empserv.getById(id);
     }
+    
+    @DeleteMapping(value = "/employees/{id}")
+    public Mono<String> deleteEmployeeById(@PathVariable("id") int id) {
+        return empserv.deleteEmployeeById(id);
+    }
+    
     
     /*
     @PostMapping("/addEmplyoee")

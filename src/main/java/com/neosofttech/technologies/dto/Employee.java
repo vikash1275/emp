@@ -25,9 +25,8 @@ public class Employee
     private int id;
     private String name;
 
-    public Employee(int i, String name) {
-        this.id=i;
-        this.name=name;
+    public Employee() {
+       
     }
 
      

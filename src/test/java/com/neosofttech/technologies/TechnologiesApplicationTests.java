@@ -36,6 +36,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import static org.mockito.ArgumentMatchers.any;
+
 
 @SpringBootTest
 class TechnologiesApplicationTests {
@@ -49,14 +51,13 @@ class TechnologiesApplicationTests {
         
         @Mock
         EmployeeRepository mockRepository;
-           
-       
-        
+                   
         @Test
 	public void testFindAllEmployee() {
              Employee emplyoee = new Employee(1,"vikash");
-             when(mockRepository.save(emplyoee)).thenReturn(emplyoee);
-		
+             when(mockRepository.save(any(Employee.class))).thenReturn(emplyoee);
+                     assertEquals(emplyoee.getId(), 1);
+
 	}
 
       

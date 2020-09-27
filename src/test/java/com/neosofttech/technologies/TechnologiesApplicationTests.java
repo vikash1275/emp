@@ -40,16 +40,24 @@ import reactor.core.publisher.Mono;
 @SpringBootTest
 class TechnologiesApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+        @Test
+        void contextLoads() {
+        }
 
 	@MockBean
 	private EmployeeService service;
         
-        Employee emplyoee = new Employee(1,"vikash");
-
+        @Mock
+        EmployeeRepository mockRepository;
+           
        
         
+        @Test
+	public void testFindAllEmployee() {
+             Employee emplyoee = new Employee(1,"vikash");
+             when(mockRepository.save(emplyoee)).thenReturn(emplyoee);
+		
+	}
+
       
  }

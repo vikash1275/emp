@@ -1,5 +1,6 @@
 package com.neosofttech.technologies;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import static com.google.common.base.CharMatcher.is;
 import com.neosofttech.technologies.controller.WebfluxRestController;
 import com.neosofttech.technologies.dto.Employee;
@@ -52,6 +53,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import org.springframework.web.context.WebApplicationContext;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 
 
@@ -64,8 +67,8 @@ class TechnologiesApplicationTests {
         
         private MockMvc mockMvc;
         
-         @Autowired
-         private WebApplicationContext wac;
+        @Autowired
+        private WebApplicationContext wac;
 
         
  
@@ -78,18 +81,35 @@ class TechnologiesApplicationTests {
          @BeforeEach
          public void setup() {
          DefaultMockMvcBuilder builder = MockMvcBuilders.webAppContextSetup(this.wac);
-         this.mockMvc = builder.build();         }
-         
+         this.mockMvc = builder.build();         
+         }
+        
          @Test
 	 public void testAddEmployee() throws Exception {
              Employee emplyoee = new Employee(1,"vikash");
              when(mockRepository.save(any(Employee.class))).thenReturn(emplyoee);
              assertEquals(emplyoee.getId(), 1);
-             ResultMatcher ok = MockMvcResultMatchers.status().isOk();
-             MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/Webflux/getAllEmplyoee");
-             this.mockMvc.perform(builder).andDo(print())
-                    .andExpect(ok);
-         }
+                       
+
+                                         MockHttpServletResponse response = mockMvc
+					.perform(post("/Webflux/getAllEmplyoee").content(asJsonString(emplyoee))
+							.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+					.andExpect(MockMvcResultMatchers.status().is(201))
+					.andExpect(MockMvcResultMatchers.jsonPath("$.id").exists())
+					.andDo(print()).andReturn().getResponse(); 
+                                                  
+           }
+         
+        
+         public static String asJsonString(final Object obj) {
+		try {
+			final ObjectMapper mapper = new ObjectMapper();
+			final String jsonContent = mapper.writeValueAsString(obj);
+			return jsonContent;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}         
         
         
 	}

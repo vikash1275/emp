@@ -69,8 +69,6 @@ class TechnologiesApplicationTests {
         
         @Autowired
         private WebApplicationContext wac;
-
-        
  
 	@MockBean
 	private EmployeeService service;
@@ -86,18 +84,27 @@ class TechnologiesApplicationTests {
         
          @Test
 	 public void testAddEmployee() throws Exception {
+             
              Employee emplyoee = new Employee(1,"vikash");
+             
              when(mockRepository.save(any(Employee.class))).thenReturn(emplyoee);
+             
+             when(service.addEmplyoee(emplyoee)).thenReturn(Mono.just(emplyoee));
+             
+             assertNotNull(emplyoee.getName());
+
              assertEquals(emplyoee.getId(), 1);
-                       
-                                /*
+                                           /*           
                                          MockHttpServletResponse response = mockMvc
 					.perform(post("/Webflux/addEmplyoee").content(asJsonString(emplyoee))
 							.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 					.andExpect(MockMvcResultMatchers.status().is(201))
 					.andExpect(MockMvcResultMatchers.jsonPath("$.id").exists())
 					.andDo(print()).andReturn().getResponse(); 
-                                  */                
+                                         
+                                         */
+                                         
+                                                 
            }
          
          public static String asJsonString(final Object obj) {

@@ -39,10 +39,16 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import static org.springframework.http.ResponseEntity.ok;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -57,8 +63,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 
-
-@SpringBootTest
+@AutoConfigureMockMvc
+@ContextConfiguration(classes = {WebfluxRestController.class})
+@WebMvcTest
 class TechnologiesApplicationTests {
 
         @Test
@@ -81,31 +88,66 @@ class TechnologiesApplicationTests {
          DefaultMockMvcBuilder builder = MockMvcBuilders.webAppContextSetup(this.wac);
          this.mockMvc = builder.build();         
          }
+         
+          private static final int id = 1;
+          private static final String name = "vikash";
         
          @Test
 	 public void testAddEmployee() throws Exception {
              
-             Employee emplyoee = new Employee(1,"vikash");
+             Employee emplyoee=new Employee();
+             emplyoee.setId(id);
+             
+             emplyoee.setName(name);
              
              when(mockRepository.save(any(Employee.class))).thenReturn(emplyoee);
              
              when(service.addEmplyoee(emplyoee)).thenReturn(Mono.just(emplyoee));
              
+             assertNotNull(mockRepository.save(emplyoee));
+             
              assertNotNull(emplyoee.getName());
 
              assertEquals(emplyoee.getId(), 1);
-                                           /*           
-                                         MockHttpServletResponse response = mockMvc
-					.perform(post("/Webflux/addEmplyoee").content(asJsonString(emplyoee))
-							.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
-					.andExpect(MockMvcResultMatchers.status().is(201))
-					.andExpect(MockMvcResultMatchers.jsonPath("$.id").exists())
-					.andDo(print()).andReturn().getResponse(); 
-                                         
-                                         */
-                                         
-                                                 
+             
+             Mockito.verify(mockRepository, times(1)).save(emplyoee);
+              
+                 MvcResult result = mockMvc
+		.perform(post("/Webflux/addEmplyoee").content(asJsonString(emplyoee))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+             String resultstring = result.getResponse().getContentAsString();
+             assertNotNull(resultstring);
+                        
            }
+         
+             @Test
+	     public void testFindAllEmployee() throws Exception 
+             {
+                               
+             Employee emplyoee1 = new Employee(1,"vikash");
+             Employee emplyoee2 = new Employee(2,"vikash");
+              
+             List<Employee> emplyoee_list = new ArrayList<Employee>();
+             
+             emplyoee_list.add(emplyoee1);
+             emplyoee_list.add(emplyoee2);
+             
+             when(mockRepository.findAll()).thenReturn(emplyoee_list);
+             
+             assertNotNull(mockRepository.findAll());
+
+             Mockito.verify(mockRepository, times(1)).findAll();
+
+             
+            
+                                                                                           
+           }
+             
+             
          
          public static String asJsonString(final Object obj) {
 		try {
